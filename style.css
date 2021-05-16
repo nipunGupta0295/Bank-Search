@@ -1,0 +1,98 @@
+body{
+    margin: -5px;
+}
+
+*{
+    box-sizing: border-box;
+}
+.container{
+    height: 100vh;
+    margin-left: 0px;
+    width: 100vw;
+}
+.head{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+.heading{
+    margin-left: 7vw;
+    padding-left: 11%;
+    display: flex;
+    width: 80vw;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    height: 10vh;
+}
+
+#city-selector{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#cities{
+    width:10vw;
+    left: 5vw;
+    margin-top: 1vh;
+    margin-left: 50px;
+    margin-right: 3vw;
+    height: 23px;
+}
+
+#city{
+    padding-left: 20%;
+    font-size: small;
+    margin-top: 4vh;
+    margin-right: 3vw;
+}
+.pagination{
+    display: block;
+    width: 5vw;
+    height: 4vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 2vh;
+}
+
+.search-bar{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    display: block;
+    width: 60vw;
+    height: 5vh;
+    background-color: lightgray;
+}
+
+.pages{
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.page{
+    width: 50px;
+    height: 4vh;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    text-align: center;
+    box-shadow: 1px 1px 4px #888888;
+    cursor: pointer;
+}
+.page:hover{
+    background-color: rgb(164, 187, 36);
+}
+.page.selected{
+    background-color: rgb(102, 100, 100);
+}
+.search-result{
+    display: flex;
+    flex-direction: column;
+    justify-content: wrap;
+    width: 100vw; 
+ }
