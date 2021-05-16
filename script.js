@@ -8,9 +8,17 @@ let paginationDiv = document.querySelector(".pages");
 let result = [];
 let tabs = {};
 async function main(input, city){
-    let response = await fetch(`https://vast-shore-74260.herokuapp.com/banks?city=${city}`);
-    let data = await response.json();
-    for(let i = 0;i<data.length;i++){
+    let url = `https://vast-shore-74260.herokuapp.com/banks?city=${city}`;
+    caches.open('apiCache').then( cache => {
+        cache.add(url).then( () => {
+            console.log("Data cached ")
+         });
+    });
+    let response = await fetch(url);  // The response of the url is fetched
+    let data = await response.json(); // response is converted in to json.
+
+    //Object matching the input is filtered and stored in results array.
+    for(let i = 0;i<data.length;i++){ 
         let bankObj = data[i];
         let values = Object.values(bankObj);
         for(let j = 0;j<values.length;j++){
@@ -23,6 +31,8 @@ async function main(input, city){
     showResult();
 }
 
+// data is divided according to the page size.
+// The divided data is stored in tabs object.
 function showResult(){
     tabs = {};
     let pageLength = pagination.value;
@@ -43,7 +53,7 @@ function showResult(){
         tabs[`page${pageCount}`] = singlePageData;
     }
     paginationDiv.innerHTML = "";
-    for(let i = 1;i<=noOfTabs;i++){
+    for(let i = 1;i<=noOfTabs;i++){  // tabs are created to show different pages
         let singleTab = document.createElement("span");
         singleTab.classList.add("page");
         singleTab.id = `page${i}`;
@@ -51,11 +61,13 @@ function showResult(){
         singleTab.addEventListener("click", showTab.bind(this));
         paginationDiv.append(singleTab);
     }
+    // page one is visible the first time.
     let pageOne = document.querySelector("#page1");
     showTab(pageOne);
 
 }
 
+// this function shows the data contained by each tab according to the page size;
 function showTab(e){
     let pageNo;
     if(e.currentTarget == null){
@@ -112,6 +124,7 @@ function showTab(e){
 
 }
 
+// when the page size is changed the table is refreshed.
 pagination.addEventListener("change", function(e){
     showResult()
 })
@@ -129,6 +142,8 @@ search.addEventListener("keypress", function(e){
     }
 })
 
+
+// when a new city is selected then data shown for the previous city is cleared.
 cities.addEventListener("change", function(){
     searchresult.innerHTML = "";
     paginationDiv.innerHTML = "";
