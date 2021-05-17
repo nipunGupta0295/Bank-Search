@@ -70,7 +70,10 @@ function showResult(){
 // this function shows the data contained by each tab according to the page size;
 function showTab(e){
     if(e == null){
+        searchresult.innerHTML = "";
+        paginationDiv.innerHTML = "";
         alert("No result Found");
+        return;
     }
     let pageNo;
     if(e.currentTarget == null){
